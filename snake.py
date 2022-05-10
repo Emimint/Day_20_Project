@@ -1,3 +1,4 @@
+import turtle
 from turtle import Turtle
 
 START_LINE_POSITIONS = [(0, 0), (-20, 0), (-40, 0)]
@@ -34,6 +35,15 @@ class Snake:
             new_y = self.segments[seg_num-1].ycor()
             self.segments[seg_num].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
+
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000,1000)
+        self.segments.clear()
+        for turtle_index in START_LINE_POSITIONS:
+            self.add_segments(turtle_index)
+        self.head = self.segments[0]
+        self.head.goto(0,0)
 
     def up(self):
         if self.head.heading() != DOWN:

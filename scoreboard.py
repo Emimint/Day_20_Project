@@ -4,7 +4,8 @@ FONT = ('Arial', 12, 'bold')
 class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
-        self.collision_counter = 0
+        self.high_score = 0
+        self.score = 0
         self.color("white")
         self.penup()
         self.shape("blank")
@@ -13,8 +14,13 @@ class Scoreboard(Turtle):
 
     def refresh(self):
         self.clear()
-        self.write(f"Score = {self.collision_counter}", False, align= ALIGNMENT, font= FONT)
+        self.write(f"Score = {self.score} High score: {self.high_score}", False, align= ALIGNMENT, font= FONT)
 
     def game_over(self):
-        self.goto(0,0)
-        self.write("GAME OVER.", False, align=ALIGNMENT, font=FONT)
+        if self.score > self.high_score:
+            self.high_score = self.score
+        self.refresh()
+        self.score = 0
+        self.refresh()
+        # self.goto(0,0)
+        # self.write("GAME OVER.", False, align=ALIGNMENT, font=FONT)
